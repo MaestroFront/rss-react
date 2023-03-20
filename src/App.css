@@ -198,3 +198,15 @@
   margin-top: 5px;
   background-color: antiquewhite;
 }
+
+.aboutus-text {
+  font-size: 20px;
+}
+
+.aboutus-text:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.aboutus-title {
+  margin-bottom: 30px;
+}
