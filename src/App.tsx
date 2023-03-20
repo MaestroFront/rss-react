@@ -1,8 +1,15 @@
 import './App.css';
 import React from 'react';
+import { Routes } from 'react-router-dom';
 
 function App() {
-  return <> </>;
+  return (
+    <>
+      <main className="main">
+        <Routes></Routes>
+      </main>
+    </>
+  );
 }
 
 export default App;
