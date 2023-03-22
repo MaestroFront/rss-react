@@ -8,6 +8,7 @@ export interface ICard {
   tel: string;
   mail: string;
   src: string;
+  date: string;
   id: string;
 }
 

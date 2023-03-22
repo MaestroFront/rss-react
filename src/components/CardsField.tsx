@@ -26,7 +26,7 @@ class CardsField extends React.Component<any, any> {
     return (
       <div className="cards-field">
         {this.state.client.map((item: any, index: any) => {
-          const { name, surname, age, country, telNumber, email, photoLink, id } = item || {};
+          const { name, surname, age, country, telNumber, email, photoLink, date } = item || {};
 
           return (
             <React.Fragment key={index}>
@@ -38,6 +38,7 @@ class CardsField extends React.Component<any, any> {
                 tel={telNumber}
                 mail={email}
                 src={photoLink}
+                date={date}
                 id={surname}
               />
             </React.Fragment>

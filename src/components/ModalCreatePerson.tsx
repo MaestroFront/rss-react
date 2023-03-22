@@ -13,6 +13,7 @@ class CreatePerson extends React.Component<any, any> {
       telNumber: '',
       email: '',
       photoLink: '',
+      date: '',
       id: '',
     };
   }
@@ -21,6 +22,9 @@ class CreatePerson extends React.Component<any, any> {
     const validated = (): void => {
       const inputs = document.querySelectorAll(
         '.modal-person .input'
+      ) as NodeListOf<HTMLInputElement>;
+      const checkboxes = document.querySelectorAll(
+        '.label-gender .input'
       ) as NodeListOf<HTMLInputElement>;
       let total = 0;
       inputs.forEach((input) => (input.value ? total++ : total));
@@ -43,6 +47,9 @@ class CreatePerson extends React.Component<any, any> {
             crosses[index].classList.add('show');
           }
         });
+        if (checkboxes[0].checked === false && checkboxes[1].checked === false) {
+          document.querySelector('.gender-container .validation-cross')?.classList.add('show');
+        }
       }
     };
 
@@ -55,7 +62,13 @@ class CreatePerson extends React.Component<any, any> {
 
     const hideCross = (title: string, value: string) => {
       const cross = document.querySelector(`.${title}-container .validation-cross`);
+      const checkboxes = document.querySelectorAll(
+        '.label-gender .input'
+      ) as NodeListOf<HTMLInputElement>;
       if (value.length > 0) {
+        cross?.classList.remove('show');
+      }
+      if (checkboxes[0].checked === true || checkboxes[1].checked === true) {
         cross?.classList.remove('show');
       }
     };
@@ -152,6 +165,62 @@ class CreatePerson extends React.Component<any, any> {
             }}
           />
           <img className="validation-cross" src="cross.svg" alt="cross" />
+        </div>
+        <div className="other-info-container">
+          <div className="modal-item-container date-container">
+            Date of Birthday{' '}
+            <input
+              className="input input-modal-date"
+              type="date"
+              onChange={(e) => {
+                this.setState({ date: e.target.value });
+                hideCross('date', e.target.value);
+              }}
+            />
+            <img className="validation-cross" src="cross.svg" alt="cross" />
+          </div>
+          <div className="modal-item-container select-container">
+            Choose a sphere{' '}
+            <select className="select-sphere">
+              <option value="first" disabled>
+                Choose the right one
+              </option>
+              <option value="sport">sport</option>
+              <option value="movie">movie</option>
+              <option value="other">other </option>
+            </select>
+            <img className="validation-cross" src="cross.svg" alt="cross" />
+          </div>
+          <div className="modal-item-container starred-container">
+            Starred in a movie
+            <input className="input input-modal-starred" type="checkbox" />
+            <img className="validation-cross" src="cross.svg" alt="cross" />
+          </div>
+          <div className="modal-item-container gender-container">
+            Choose a gender
+            <label className="label-gender" htmlFor="gender">
+              man
+              <input
+                name="gender"
+                className="input input-modal-gender-man"
+                type="radio"
+                onChange={(e) => hideCross('gender', e.target.value)}
+              />
+              woman
+              <input
+                name="gender"
+                className="input input-modal-gender-woman"
+                type="radio"
+                onChange={(e) => hideCross('gender', e.target.value)}
+              />
+            </label>
+            <img className="validation-cross" src="cross.svg" alt="cross" />
+          </div>
+          <div className="modal-item-container file-container">
+            Upload a file
+            <input className="input input-modal-file" type="file" />
+            <img className="validation-cross" src="cross.svg" alt="cross" />
+          </div>
         </div>
         <button
           type="button"

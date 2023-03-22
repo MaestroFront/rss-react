@@ -182,7 +182,7 @@
   flex-direction: column;
 }
 
-.modal-person .modal-item-container:not(:last-child) {
+.modal-person .modal-item-container {
   margin-bottom: 10px;
 }
 
@@ -223,4 +223,49 @@
 
 .validation-cross.show {
   opacity: 1;
+}
+
+.other-info-container {
+  width: 50%;
+  gap: 10px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.date-container,
+.select-container,
+.starred-container,
+.gender-container {
+  width: 40%;
+}
+
+.select-sphere {
+  margin-top: 10px;
+  background-color: antiquewhite;
+  padding: 8px;
+}
+
+.input-modal-file {
+  border: 1px solid black;
+}
+
+.label-gender {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-modal-gender-man {
+  margin-right: 10px;
+  margin-left: 5px;
+}
+
+.input-modal-gender-woman {
+  margin-left: 5px;
+}
+
+.date-container .validation-cross,
+.file-container .validation-cross {
+  right: -25px;
 }
