@@ -18,14 +18,46 @@ class CreatePerson extends React.Component<any, any> {
   }
 
   render() {
-    const showAddBtn = () => {
-      const addBtn = document.querySelector('.btn-add-new-person');
+    const validated = (): void => {
       const inputs = document.querySelectorAll(
         '.modal-person .input'
       ) as NodeListOf<HTMLInputElement>;
       let total = 0;
       inputs.forEach((input) => (input.value ? total++ : total));
-      total === 7 ? addBtn?.classList.add('show') : console.log('Нельзя создать персонажа!');
+      if (total === 7) {
+        const res = localStorage.getItem('client');
+        if (res) {
+          const resJson = JSON.parse(res);
+          resJson.push(this.state);
+          localStorage.setItem('client', JSON.stringify(resJson));
+        } else {
+          localStorage.setItem('client', JSON.stringify([this.state]));
+        }
+        clearInputs();
+      } else {
+        const crosses = document.querySelectorAll(
+          '.validation-cross'
+        ) as NodeListOf<HTMLImageElement>;
+        inputs.forEach((input, index) => {
+          if (input.value.length === 0) {
+            crosses[index].classList.add('show');
+          }
+        });
+      }
+    };
+
+    const clearInputs = (): void => {
+      const inputs = document.querySelectorAll(
+        '.modal-person .input'
+      ) as NodeListOf<HTMLInputElement>;
+      inputs.forEach((input) => (input.value = ''));
+    };
+
+    const hideCross = (title: string, value: string) => {
+      const cross = document.querySelector(`.${title}-container .validation-cross`);
+      if (value.length > 0) {
+        cross?.classList.remove('show');
+      }
     };
 
     return (
@@ -38,9 +70,10 @@ class CreatePerson extends React.Component<any, any> {
             placeholder="add a name"
             onChange={(e) => {
               this.setState({ name: e.target.value });
-              showAddBtn();
+              hideCross('name', e.target.value);
             }}
           />
+          <img className="validation-cross" src="cross.svg" alt="cross" />
         </div>
         <div className="modal-item-container surname-container">
           Surname{' '}
@@ -50,9 +83,10 @@ class CreatePerson extends React.Component<any, any> {
             placeholder="add a surname"
             onChange={(e) => {
               this.setState({ surname: e.target.value });
-              showAddBtn();
+              hideCross('surname', e.target.value);
             }}
           />
+          <img className="validation-cross" src="cross.svg" alt="cross" />
         </div>
         <div className="modal-item-container age-container">
           Age{' '}
@@ -62,9 +96,10 @@ class CreatePerson extends React.Component<any, any> {
             placeholder="add an age"
             onChange={(e) => {
               this.setState({ age: e.target.value });
-              showAddBtn();
+              hideCross('age', e.target.value);
             }}
           />
+          <img className="validation-cross" src="cross.svg" alt="cross" />
         </div>
         <div className="modal-item-container country-container">
           Country{' '}
@@ -74,9 +109,10 @@ class CreatePerson extends React.Component<any, any> {
             placeholder="add a country"
             onChange={(e) => {
               this.setState({ country: e.target.value });
-              showAddBtn();
+              hideCross('country', e.target.value);
             }}
           />
+          <img className="validation-cross" src="cross.svg" alt="cross" />
         </div>
         <div className="modal-item-container number-container">
           Tel number{' '}
@@ -86,9 +122,10 @@ class CreatePerson extends React.Component<any, any> {
             placeholder="add a number"
             onChange={(e) => {
               this.setState({ telNumber: e.target.value });
-              showAddBtn();
+              hideCross('number', e.target.value);
             }}
           />
+          <img className="validation-cross" src="cross.svg" alt="cross" />
         </div>
         <div className="modal-item-container mail-container">
           EMail{' '}
@@ -98,9 +135,10 @@ class CreatePerson extends React.Component<any, any> {
             placeholder="add a mail"
             onChange={(e) => {
               this.setState({ email: e.target.value });
-              showAddBtn();
+              hideCross('mail', e.target.value);
             }}
           />
+          <img className="validation-cross" src="cross.svg" alt="cross" />
         </div>
         <div className="modal-item-container src-container">
           Photo link{' '}
@@ -110,23 +148,17 @@ class CreatePerson extends React.Component<any, any> {
             placeholder="add a link"
             onChange={(e) => {
               this.setState({ photoLink: e.target.value });
-              showAddBtn();
+              hideCross('src', e.target.value);
             }}
           />
+          <img className="validation-cross" src="cross.svg" alt="cross" />
         </div>
         <button
           type="button"
           className="btn-add-new-person"
-          onClick={() => {
-            const res = localStorage.getItem('client');
-            if (res) {
-              const resJson = JSON.parse(res);
-              resJson.push(this.state);
-              localStorage.setItem('client', JSON.stringify(resJson));
-            } else {
-              localStorage.setItem('client', JSON.stringify([this.state]));
-            }
-            window.location.pathname = '/';
+          onClick={function () {
+            validated();
+            // window.location.pathname = '/';
           }}
         >
           Add a new person

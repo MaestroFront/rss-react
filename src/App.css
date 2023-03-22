@@ -97,16 +97,6 @@
   transition: all .2s ease-in-out;
 }
 
-.btn-add-new-person {
-  opacity: .5;
-  pointer-events: none;
-}
-
-.btn-add-new-person.show {
-  opacity: 1;
-  pointer-events: all;
-}
-
 .link-add-person {
   padding: 8.5px;
   min-width: 10%;
@@ -197,6 +187,7 @@
 }
 
 .modal-item-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -219,4 +210,17 @@
 
 .aboutus-title {
   margin-bottom: 30px;
+}
+
+.validation-cross {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  right: 2%;
+  opacity: 0;
+}
+
+.validation-cross.show {
+  opacity: 1;
 }
