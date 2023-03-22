@@ -18,6 +18,16 @@ class CreatePerson extends React.Component<any, any> {
   }
 
   render() {
+    const showAddBtn = () => {
+      const addBtn = document.querySelector('.btn-add-new-person');
+      const inputs = document.querySelectorAll(
+        '.modal-person .input'
+      ) as NodeListOf<HTMLInputElement>;
+      let total = 0;
+      inputs.forEach((input) => (input.value ? total++ : total));
+      total === 7 ? addBtn?.classList.add('show') : console.log('Нельзя создать персонажа!');
+    };
+
     return (
       <div className="modal-person">
         <div className="modal-item-container name-container">
@@ -26,7 +36,10 @@ class CreatePerson extends React.Component<any, any> {
             className="input input-modal-name"
             type="text"
             placeholder="add a name"
-            onChange={(e) => this.setState({ name: e.target.value })}
+            onChange={(e) => {
+              this.setState({ name: e.target.value });
+              showAddBtn();
+            }}
           />
         </div>
         <div className="modal-item-container surname-container">
@@ -35,7 +48,10 @@ class CreatePerson extends React.Component<any, any> {
             className="input input-modal-surname"
             type="text"
             placeholder="add a surname"
-            onChange={(e) => this.setState({ surname: e.target.value })}
+            onChange={(e) => {
+              this.setState({ surname: e.target.value });
+              showAddBtn();
+            }}
           />
         </div>
         <div className="modal-item-container age-container">
@@ -44,7 +60,10 @@ class CreatePerson extends React.Component<any, any> {
             className="input input-modal-age"
             type="text"
             placeholder="add an age"
-            onChange={(e) => this.setState({ age: e.target.value })}
+            onChange={(e) => {
+              this.setState({ age: e.target.value });
+              showAddBtn();
+            }}
           />
         </div>
         <div className="modal-item-container country-container">
@@ -53,7 +72,10 @@ class CreatePerson extends React.Component<any, any> {
             className="input input-modal-country"
             type="text"
             placeholder="add a country"
-            onChange={(e) => this.setState({ country: e.target.value })}
+            onChange={(e) => {
+              this.setState({ country: e.target.value });
+              showAddBtn();
+            }}
           />
         </div>
         <div className="modal-item-container number-container">
@@ -62,7 +84,10 @@ class CreatePerson extends React.Component<any, any> {
             className="input input-modal-number"
             type="text"
             placeholder="add a number"
-            onChange={(e) => this.setState({ telNumber: e.target.value })}
+            onChange={(e) => {
+              this.setState({ telNumber: e.target.value });
+              showAddBtn();
+            }}
           />
         </div>
         <div className="modal-item-container mail-container">
@@ -71,7 +96,10 @@ class CreatePerson extends React.Component<any, any> {
             className="input input-modal-mail"
             type="text"
             placeholder="add a mail"
-            onChange={(e) => this.setState({ email: e.target.value })}
+            onChange={(e) => {
+              this.setState({ email: e.target.value });
+              showAddBtn();
+            }}
           />
         </div>
         <div className="modal-item-container src-container">
@@ -80,7 +108,10 @@ class CreatePerson extends React.Component<any, any> {
             className="input input-modal-src"
             type="text"
             placeholder="add a link"
-            onChange={(e) => this.setState({ photoLink: e.target.value })}
+            onChange={(e) => {
+              this.setState({ photoLink: e.target.value });
+              showAddBtn();
+            }}
           />
         </div>
         <button
@@ -91,7 +122,6 @@ class CreatePerson extends React.Component<any, any> {
             if (res) {
               const resJson = JSON.parse(res);
               resJson.push(this.state);
-              console.log(resJson);
               localStorage.setItem('client', JSON.stringify(resJson));
             } else {
               localStorage.setItem('client', JSON.stringify([this.state]));

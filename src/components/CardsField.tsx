@@ -18,7 +18,7 @@ class CardsField extends React.Component<any, any> {
   }
 
   componentDidUpdate(): void {
-    console.log(this.state.client);
+    // console.log(this.state.client);
   }
 
   render() {
@@ -38,7 +38,7 @@ class CardsField extends React.Component<any, any> {
                 tel={telNumber}
                 mail={email}
                 src={photoLink}
-                id={id}
+                id={surname}
               />
             </React.Fragment>
           );

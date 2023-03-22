@@ -12,6 +12,17 @@ export interface ICard {
 }
 
 const MyCard = function (props: ICard) {
+  const deletePerson = (id: string) => {
+    const cards = document.querySelectorAll('.card') as NodeListOf<HTMLDivElement>;
+    const persons = JSON.parse(localStorage.getItem('client') as string) as ICard[];
+    const indexDelete = persons.findIndex((el) => el.id === id);
+    persons.splice(indexDelete, 1);
+    localStorage.setItem('client', JSON.stringify(persons));
+    cards.forEach((el) => {
+      if (el.id === id) el.remove();
+    });
+  };
+
   return (
     <div className="card" id={props.id}>
       <div className="card__image-container">
@@ -25,7 +36,16 @@ const MyCard = function (props: ICard) {
       </div>
       <div className="card__btns">
         <button>Info</button>
-        <button>Delete</button>
+        <button
+          onClick={(e) => {
+            // eslint-disable-next-line prettier/prettier
+            const element = e.target as HTMLButtonElement;
+            const id = element.parentElement?.parentElement?.id as string;
+            deletePerson(id);
+          }}
+        >
+          Delete
+        </button>
       </div>
       <span className="tel-number">{props.tel}</span>
       <span className="e-mail">{props.mail}</span>

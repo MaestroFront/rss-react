@@ -19,7 +19,7 @@
       "error",
       {
         "singleQuote": true,
-        "parser": "flow",
+        // "parser": "flow",
         "jsxSingleQuote": false,
         "arrowParens": "always",
         "tabWidth": 2,
