@@ -26,20 +26,35 @@ class CardsField extends React.Component<any, any> {
     return (
       <div className="cards-field">
         {this.state.client.map((item: any, index: any) => {
-          const { name, surname, age, country, telNumber, email, photoLink, date } = item || {};
+          const {
+            name,
+            surname,
+            gender,
+            age,
+            country,
+            birthday,
+            sphere,
+            telNumber,
+            email,
+            photoLink,
+            movie,
+          } = item || {};
 
           return (
             <React.Fragment key={index}>
               <MyCard
-                title={name}
-                description={surname}
+                name={name}
+                surname={surname}
+                gender={gender}
                 age={age}
-                city={country}
+                country={country}
+                birthday={birthday}
+                sphere={sphere}
                 tel={telNumber}
                 mail={email}
                 src={photoLink}
-                date={date}
                 id={surname}
+                movie={movie}
               />
             </React.Fragment>
           );

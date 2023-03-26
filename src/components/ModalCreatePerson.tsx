@@ -8,13 +8,16 @@ class CreatePerson extends React.Component<any, any> {
     this.state = {
       name: '',
       surname: '',
+      gender: '',
       age: '',
       country: '',
+      birthday: '',
+      sphere: 'sport',
       telNumber: '',
       email: '',
       photoLink: '',
-      date: '',
       id: '',
+      movie: 'false',
     };
   }
 
@@ -28,8 +31,9 @@ class CreatePerson extends React.Component<any, any> {
       ) as NodeListOf<HTMLInputElement>;
       let total = 0;
       inputs.forEach((input) => (input.value ? total++ : total));
-      if (total === 7) {
+      if (total > 10) {
         const res = localStorage.getItem('client');
+
         if (res) {
           const resJson = JSON.parse(res);
           resJson.push(this.state);
@@ -37,6 +41,7 @@ class CreatePerson extends React.Component<any, any> {
         } else {
           localStorage.setItem('client', JSON.stringify([this.state]));
         }
+
         clearInputs();
       } else {
         const crosses = document.querySelectorAll(
@@ -57,7 +62,10 @@ class CreatePerson extends React.Component<any, any> {
       const inputs = document.querySelectorAll(
         '.modal-person .input'
       ) as NodeListOf<HTMLInputElement>;
-      inputs.forEach((input) => (input.value = ''));
+      inputs.forEach((input) => {
+        input.value = '';
+        input.checked = false;
+      });
     };
 
     const hideCross = (title: string, value: string) => {
@@ -74,12 +82,13 @@ class CreatePerson extends React.Component<any, any> {
     };
 
     return (
-      <div className="modal-person">
+      <form className="modal-person">
         <div className="modal-item-container name-container">
           Name{' '}
           <input
             className="input input-modal-name"
             type="text"
+            maxLength={20}
             placeholder="add a name"
             onChange={(e) => {
               this.setState({ name: e.target.value });
@@ -93,9 +102,11 @@ class CreatePerson extends React.Component<any, any> {
           <input
             className="input input-modal-surname"
             type="text"
+            maxLength={20}
             placeholder="add a surname"
             onChange={(e) => {
               this.setState({ surname: e.target.value });
+              this.setState({ id: e.target.value });
               hideCross('surname', e.target.value);
             }}
           />
@@ -105,7 +116,9 @@ class CreatePerson extends React.Component<any, any> {
           Age{' '}
           <input
             className="input input-modal-age"
-            type="text"
+            type="number"
+            max={100}
+            maxLength={3}
             placeholder="add an age"
             onChange={(e) => {
               this.setState({ age: e.target.value });
@@ -119,6 +132,7 @@ class CreatePerson extends React.Component<any, any> {
           <input
             className="input input-modal-country"
             type="text"
+            maxLength={10}
             placeholder="add a country"
             onChange={(e) => {
               this.setState({ country: e.target.value });
@@ -131,7 +145,8 @@ class CreatePerson extends React.Component<any, any> {
           Tel number{' '}
           <input
             className="input input-modal-number"
-            type="text"
+            type="number"
+            maxLength={11}
             placeholder="add a number"
             onChange={(e) => {
               this.setState({ telNumber: e.target.value });
@@ -173,7 +188,7 @@ class CreatePerson extends React.Component<any, any> {
               className="input input-modal-date"
               type="date"
               onChange={(e) => {
-                this.setState({ date: e.target.value });
+                this.setState({ birthday: e.target.value });
                 hideCross('date', e.target.value);
               }}
             />
@@ -181,7 +196,12 @@ class CreatePerson extends React.Component<any, any> {
           </div>
           <div className="modal-item-container select-container">
             Choose a sphere{' '}
-            <select className="select-sphere">
+            <select
+              className="select-sphere"
+              onChange={(e) => {
+                this.setState({ sphere: e.target.value });
+              }}
+            >
               <option value="first" disabled>
                 Choose the right one
               </option>
@@ -193,7 +213,13 @@ class CreatePerson extends React.Component<any, any> {
           </div>
           <div className="modal-item-container starred-container">
             Starred in a movie
-            <input className="input input-modal-starred" type="checkbox" />
+            <input
+              className="input input-modal-starred"
+              type="checkbox"
+              onChange={(e) => {
+                this.setState({ movie: e.target.checked });
+              }}
+            />
             <img className="validation-cross" src="cross.svg" alt="cross" />
           </div>
           <div className="modal-item-container gender-container">
@@ -202,37 +228,46 @@ class CreatePerson extends React.Component<any, any> {
               man
               <input
                 name="gender"
+                id="man"
                 className="input input-modal-gender-man"
                 type="radio"
-                onChange={(e) => hideCross('gender', e.target.value)}
+                onChange={(e) => {
+                  this.setState({ gender: e.target.id.toUpperCase()[0] });
+                  hideCross('gender', e.target.value);
+                }}
               />
               woman
               <input
                 name="gender"
+                id="woman"
                 className="input input-modal-gender-woman"
                 type="radio"
-                onChange={(e) => hideCross('gender', e.target.value)}
+                onChange={(e) => {
+                  this.setState({ gender: e.target.id.toUpperCase()[0] });
+                  hideCross('gender', e.target.value);
+                }}
               />
             </label>
             <img className="validation-cross" src="cross.svg" alt="cross" />
           </div>
-          <div className="modal-item-container file-container">
+          {/* <div className="modal-item-container file-container">
             Upload a file
             <input className="input input-modal-file" type="file" />
             <img className="validation-cross" src="cross.svg" alt="cross" />
-          </div>
+          </div> */}
         </div>
         <button
-          type="button"
+          type="submit"
           className="btn-add-new-person"
-          onClick={function () {
+          onClick={function (e) {
+            e.preventDefault();
             validated();
             // window.location.pathname = '/';
           }}
         >
           Add a new person
         </button>
-      </div>
+      </form>
     );
   }
 }
