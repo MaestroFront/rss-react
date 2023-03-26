@@ -118,7 +118,6 @@ class CreatePerson extends React.Component<any, any> {
             className="input input-modal-age"
             type="number"
             max={100}
-            maxLength={3}
             placeholder="add an age"
             onChange={(e) => {
               this.setState({ age: e.target.value });
