@@ -2,6 +2,7 @@ import React from 'react';
 import MyCard, { ICard } from './MyCard';
 import { personsData } from '../data/data';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 class CardsField extends React.Component<any, any> {
   constructor(props: ICard) {
     super(props);
@@ -25,20 +26,10 @@ class CardsField extends React.Component<any, any> {
     setTimeout(() => localStorage.setItem('client', JSON.stringify(this.state.client)), 200);
     return (
       <div className="cards-field">
-        {this.state.client.map((item: any, index: any) => {
-          const {
-            name,
-            surname,
-            gender,
-            age,
-            country,
-            birthday,
-            sphere,
-            telNumber,
-            email,
-            photoLink,
-            movie,
-          } = item || {};
+        {this.state.client.map((item: ICard, index: number) => {
+          console.log(item);
+          const { name, surname, gender, age, country, birthday, sphere, tel, mail, src, movie } =
+            item || {};
 
           return (
             <React.Fragment key={index}>
@@ -50,9 +41,9 @@ class CardsField extends React.Component<any, any> {
                 country={country}
                 birthday={birthday}
                 sphere={sphere}
-                tel={telNumber}
-                mail={email}
-                src={photoLink}
+                tel={tel}
+                mail={mail}
+                src={src}
                 id={surname}
                 movie={movie}
               />

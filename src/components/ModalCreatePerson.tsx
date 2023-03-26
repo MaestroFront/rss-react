@@ -1,7 +1,7 @@
 import React from 'react';
 import { ICard } from './MyCard';
 
-class CreatePerson extends React.Component<any, any> {
+class CreatePerson extends React.Component {
   constructor(props: ICard) {
     super(props);
 
@@ -14,8 +14,8 @@ class CreatePerson extends React.Component<any, any> {
       birthday: '',
       sphere: 'sport',
       telNumber: '',
-      email: '',
-      photoLink: '',
+      mail: '',
+      src: '',
       id: '',
       movie: 'false',
     };
