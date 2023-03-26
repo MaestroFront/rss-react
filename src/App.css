@@ -124,7 +124,7 @@
 
 .card {
   width: 220px;
-  max-height: 300px;
+  max-height: 400px;
   border: 1px solid brown;
   border-radius: 10px;
   padding: 10px;
@@ -142,10 +142,15 @@
   border-radius: 30px;
 }
 
-.card-title,
-.card-description {
+.card-name,
+.card-surname {
   margin-bottom: 5px;
   text-align: center;
+}
+
+.card__info {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 .card__info,
@@ -166,7 +171,10 @@
   cursor: pointer;
 }
 
-.tel-number {
+.tel-number,
+.birthday,
+.sphere,
+.movie {
   margin-bottom: 5px;
 }
 

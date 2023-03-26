@@ -1,15 +1,18 @@
 import React from 'react';
 
 export interface ICard {
-  title: string;
-  description: string;
+  name: string;
+  surname: string;
+  gender: string;
   age: string;
-  city: string;
+  country: string;
+  birthday: string;
+  sphere: string;
   tel: string;
   mail: string;
   src: string;
-  date: string;
   id: string;
+  movie: string;
 }
 
 const MyCard = function (props: ICard) {
@@ -24,17 +27,25 @@ const MyCard = function (props: ICard) {
     });
   };
 
+  let movie = '';
+
+  props.movie === 'true' ? (movie = 'yes') : (movie = 'no');
+
   return (
-    <div className="card" id={props.id}>
+    <div className="card" id={props.surname}>
       <div className="card__image-container">
-        <img className="image" src={props.src} alt={props.title} />
+        <img className="image" src={props.src} alt={props.name} />
       </div>
-      <h3 className="card-title">{props.title}</h3>
-      <h4 className="card-description">{props.description}</h4>
+      <h3 className="card-name">{props.name}</h3>
+      <h4 className="card-surname">{props.surname}</h4>
       <div className="card__info">
-        <span>{props.age}</span>
-        <span>{props.city}</span>
+        <span>{props.gender}</span>
+        <span>{props.age} y.o.</span>
+        <span>{props.country}</span>
       </div>
+      <div className="birthday">{props.birthday}</div>
+      <div className="sphere">Sphere: {props.sphere}</div>
+      <div className="movie">Starred in a movie: {movie}</div>
       <div className="card__btns">
         <button>Info</button>
         <button
