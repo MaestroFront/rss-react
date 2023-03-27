@@ -167,18 +167,49 @@ class CreatePerson extends React.Component {
           />
           <img className="validation-cross" src="cross.svg" alt="cross" />
         </div>
-        <div className="modal-item-container src-container">
-          Photo link{' '}
-          <input
-            className="input input-modal-src"
-            type="text"
-            placeholder="add a link"
-            onChange={(e) => {
-              this.setState({ photoLink: e.target.value });
-              hideCross('src', e.target.value);
-            }}
-          />
-          <img className="validation-cross" src="cross.svg" alt="cross" />
+        <span className="link-or-file">Link or file</span>
+        <div className="photo-container">
+          <div className="modal-item-container src-container">
+            <input
+              className="input input-modal-src"
+              type="text"
+              placeholder="add a link"
+              onChange={(e) => {
+                this.setState({ photoLink: e.target.value });
+                hideCross('src', e.target.value);
+              }}
+            />
+            <img className="validation-cross" src="cross.svg" alt="cross" />
+          </div>
+          <span>or</span>
+          <div className="modal-item-container file-container">
+            <input
+              className="input input-modal-file"
+              type="file"
+              accept="image/png, image/jpeg"
+              onChange={(e) => {
+                const element = e.target as HTMLInputElement;
+                if (element.files && element.files[0]) {
+                  if (element.files[0].type.match('image.*')) {
+                    const reader = new FileReader();
+                    reader.onload = function (el) {
+                      const element = el.target as FileReader | null;
+                      if (element?.result) {
+                        const src = element.result as string;
+                        localStorage.setItem(
+                          (document.querySelector('.input-modal-name') as HTMLInputElement).value,
+                          src
+                        );
+                      }
+                    };
+                    reader.readAsDataURL(element.files[0]);
+                  }
+                }
+              }}
+            />
+            <img className="test-img" src="" alt="" />
+            <img className="validation-cross" src="cross.svg" alt="cross" />
+          </div>
         </div>
         <div className="other-info-container">
           <div className="modal-item-container date-container">
@@ -249,11 +280,6 @@ class CreatePerson extends React.Component {
             </label>
             <img className="validation-cross" src="cross.svg" alt="cross" />
           </div>
-          {/* <div className="modal-item-container file-container">
-            Upload a file
-            <input className="input input-modal-file" type="file" />
-            <img className="validation-cross" src="cross.svg" alt="cross" />
-          </div> */}
         </div>
         <button
           type="submit"
