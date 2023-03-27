@@ -148,7 +148,7 @@ class CreatePerson extends React.Component {
             maxLength={11}
             placeholder="add a number"
             onChange={(e) => {
-              this.setState({ telNumber: e.target.value });
+              this.setState({ tel: e.target.value });
               hideCross('number', e.target.value);
             }}
           />
