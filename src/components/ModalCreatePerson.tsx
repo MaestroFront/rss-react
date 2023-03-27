@@ -175,7 +175,7 @@ class CreatePerson extends React.Component {
               type="text"
               placeholder="add a link"
               onChange={(e) => {
-                this.setState({ photoLink: e.target.value });
+                this.setState({ src: e.target.value });
                 hideCross('src', e.target.value);
               }}
             />
