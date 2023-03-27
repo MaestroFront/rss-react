@@ -161,7 +161,7 @@ class CreatePerson extends React.Component {
             type="text"
             placeholder="add a mail"
             onChange={(e) => {
-              this.setState({ email: e.target.value });
+              this.setState({ mail: e.target.value });
               hideCross('mail', e.target.value);
             }}
           />

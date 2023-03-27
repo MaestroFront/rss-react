@@ -53,6 +53,10 @@
 
 .image {
   width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .main-link:hover,
@@ -140,6 +144,7 @@
   margin-bottom: 5px;
   overflow: hidden;
   border-radius: 30px;
+  position: relative;
 }
 
 .card-name,
