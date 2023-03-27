@@ -13,7 +13,7 @@ class CreatePerson extends React.Component {
       country: '',
       birthday: '',
       sphere: 'sport',
-      telNumber: '',
+      tel: '',
       mail: '',
       src: '',
       id: '',
