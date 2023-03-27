@@ -27,7 +27,6 @@ class CardsField extends React.Component<any, any> {
     return (
       <div className="cards-field">
         {this.state.client.map((item: ICard, index: number) => {
-          console.log(item);
           const { name, surname, gender, age, country, birthday, sphere, tel, mail, src, movie } =
             item || {};
 

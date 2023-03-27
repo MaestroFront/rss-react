@@ -251,7 +251,8 @@
 .select-sphere {
   margin-top: 10px;
   background-color: antiquewhite;
-  padding: 8px;
+  padding: 7px;
+  outline: 1px solid black;
 }
 
 .input-modal-file {
@@ -273,7 +274,30 @@
   margin-left: 5px;
 }
 
-.date-container .validation-cross,
-.file-container .validation-cross {
+.date-container .validation-cross {
   right: -25px;
+}
+
+.photo-container {
+  border: 2px solid black;
+  padding: 10px;
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.link-or-file {
+  margin-bottom: 10px;
+}
+
+.photo-container .validation-cross {
+  top: 16px;
+}
+
+.gender-container .validation-cross {
+  top: 10px;
+  right: 50px;
 }

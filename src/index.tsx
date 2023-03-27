@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(
   // eslint-disable-next-line prettier/prettier
-  document.querySelector('.body') as HTMLDivElement
+  document.querySelector('#root') as HTMLDivElement
 );
 root.render(
   <React.StrictMode>

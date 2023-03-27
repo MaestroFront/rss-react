@@ -25,6 +25,15 @@ const MyCard = function (props: ICard) {
     cards.forEach((el) => {
       if (el.id === id) el.remove();
     });
+    localStorage.removeItem(`${props.name}`);
+  };
+
+  const showImage = (props: ICard) => {
+    if (localStorage.getItem(props.name) as string) {
+      return localStorage.getItem(props.name) as string;
+    } else {
+      return props.src;
+    }
   };
 
   let movie = '';
@@ -34,7 +43,7 @@ const MyCard = function (props: ICard) {
   return (
     <div className="card" id={props.surname}>
       <div className="card__image-container">
-        <img className="image" src={props.src} alt={props.name} />
+        <img className="image" src={showImage(props)} alt={props.name} />
       </div>
       <h3 className="card-name">{props.name}</h3>
       <h4 className="card-surname">{props.surname}</h4>
