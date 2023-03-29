@@ -94,7 +94,6 @@ class CreatePerson extends React.Component {
           <input
             className="input input-modal-age"
             type="number"
-            max={100}
             placeholder="add an age"
             onChange={(e) => {
               if (e.target.value) {
@@ -128,7 +127,6 @@ class CreatePerson extends React.Component {
           <input
             className="input input-modal-number"
             type="number"
-            maxLength={11}
             placeholder="add a number"
             onChange={(e) => {
               if (e.target.value) {
