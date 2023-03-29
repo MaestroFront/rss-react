@@ -2,17 +2,14 @@ import React from 'react';
 
 export interface ICard {
   name: string;
-  surname: string;
   gender: string;
-  age: string;
-  country: string;
   birthday: string;
   sphere: string;
-  tel: string;
   mail: string;
   src: string;
   id: string;
   movie: string;
+  file: string;
 }
 
 export const MyCard = function (props: ICard) {
@@ -41,16 +38,13 @@ export const MyCard = function (props: ICard) {
   props.movie === 'true' ? (movie = 'yes') : (movie = 'no');
 
   return (
-    <div className="card" id={props.surname}>
+    <div className="card" id={props.name}>
       <div className="card__image-container">
         <img className="image" src={showImage(props)} alt={props.name} />
       </div>
       <h3 className="card-name">{props.name}</h3>
-      <h4 className="card-surname">{props.surname}</h4>
       <div className="card__info">
         <span>{props.gender}</span>
-        <span>{props.age} y.o.</span>
-        <span>{props.country}</span>
       </div>
       <div className="birthday">{props.birthday}</div>
       <div className="sphere">Sphere: {props.sphere}</div>
@@ -68,7 +62,6 @@ export const MyCard = function (props: ICard) {
           Delete
         </button>
       </div>
-      <span className="tel-number">{props.tel}</span>
       <span className="e-mail">{props.mail}</span>
     </div>
   );

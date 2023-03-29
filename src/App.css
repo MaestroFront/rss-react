@@ -93,12 +93,17 @@
 }
 
 .btn-search,
-.btn-add-new-person {
+.btn-add-new-person,
+.btn-reset {
   padding: 10px;
   min-width: 10%;
   background-color: antiquewhite;
   cursor: pointer;
   transition: all .2s ease-in-out;
+}
+
+.btn-reset {
+  margin-bottom: 10px;
 }
 
 .link-add-person {
@@ -311,7 +316,6 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   width: 20%;
   height: 20%;
   background-color: white;
@@ -320,7 +324,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: scale(0);
+  transform: translate(-50%, -50%) scale(0);
 }
 
 .success-adding.show {
