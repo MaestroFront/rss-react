@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Footer = function () {
+export const Footer = function () {
   return (
     <footer className="footer">
       <a className="rs-link" href="https://rs.school/">

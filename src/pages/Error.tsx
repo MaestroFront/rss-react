@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ErrorPage = function () {
+export const ErrorPage = function () {
   return <div>Error</div>;
 };
 

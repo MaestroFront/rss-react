@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AboutUs = function () {
+export const AboutUs = function () {
   return (
     <ul className="aboutus-container">
       <h1 className="aboutus-title">Celebrity Vault</h1>
