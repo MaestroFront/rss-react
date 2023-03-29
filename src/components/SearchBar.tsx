@@ -1,7 +1,7 @@
 import React from 'react';
 import AddPerson from './AddPerson';
 
-const SearchBar = function () {
+export const SearchBar = function () {
   return (
     <form className="search-bar">
       <input type="text" className="input-search" />

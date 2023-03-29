@@ -22,62 +22,20 @@ class CreatePerson extends React.Component {
   }
 
   render() {
-    const validated = (): void => {
-      const inputs = document.querySelectorAll(
-        '.modal-person .input'
-      ) as NodeListOf<HTMLInputElement>;
-      const checkboxes = document.querySelectorAll(
-        '.label-gender .input'
-      ) as NodeListOf<HTMLInputElement>;
-      let total = 0;
-      inputs.forEach((input) => (input.value ? total++ : total));
-      if (total > 10) {
-        const res = localStorage.getItem('client');
+    const validation = (e: React.FormEvent<HTMLInputElement>) => {
+      const element = e.target as HTMLInputElement;
+      element.style.border = '2px solid red';
+    };
 
-        if (res) {
-          const resJson = JSON.parse(res);
-          resJson.push(this.state);
-          localStorage.setItem('client', JSON.stringify(resJson));
-        } else {
-          localStorage.setItem('client', JSON.stringify([this.state]));
-        }
+    const addPerson = () => {
+      const res = localStorage.getItem('client');
 
-        clearInputs();
+      if (res) {
+        const resJson = JSON.parse(res);
+        resJson.push(this.state);
+        localStorage.setItem('client', JSON.stringify(resJson));
       } else {
-        const crosses = document.querySelectorAll(
-          '.validation-cross'
-        ) as NodeListOf<HTMLImageElement>;
-        inputs.forEach((input, index) => {
-          if (input.value.length === 0) {
-            crosses[index].classList.add('show');
-          }
-        });
-        if (checkboxes[0].checked === false && checkboxes[1].checked === false) {
-          document.querySelector('.gender-container .validation-cross')?.classList.add('show');
-        }
-      }
-    };
-
-    const clearInputs = (): void => {
-      const inputs = document.querySelectorAll(
-        '.modal-person .input'
-      ) as NodeListOf<HTMLInputElement>;
-      inputs.forEach((input) => {
-        input.value = '';
-        input.checked = false;
-      });
-    };
-
-    const hideCross = (title: string, value: string) => {
-      const cross = document.querySelector(`.${title}-container .validation-cross`);
-      const checkboxes = document.querySelectorAll(
-        '.label-gender .input'
-      ) as NodeListOf<HTMLInputElement>;
-      if (value.length > 0) {
-        cross?.classList.remove('show');
-      }
-      if (checkboxes[0].checked === true || checkboxes[1].checked === true) {
-        cross?.classList.remove('show');
+        localStorage.setItem('client', JSON.stringify([this.state]));
       }
     };
 
@@ -92,10 +50,10 @@ class CreatePerson extends React.Component {
             placeholder="add a name"
             onChange={(e) => {
               this.setState({ name: e.target.value });
-              hideCross('name', e.target.value);
             }}
+            onInvalid={(e) => validation(e)}
+            required={true}
           />
-          <img className="validation-cross" src="cross.svg" alt="cross" />
         </div>
         <div className="modal-item-container surname-container">
           Surname{' '}
@@ -107,10 +65,10 @@ class CreatePerson extends React.Component {
             onChange={(e) => {
               this.setState({ surname: e.target.value });
               this.setState({ id: e.target.value });
-              hideCross('surname', e.target.value);
             }}
+            onInvalid={(e) => validation(e)}
+            required={true}
           />
-          <img className="validation-cross" src="cross.svg" alt="cross" />
         </div>
         <div className="modal-item-container age-container">
           Age{' '}
@@ -121,10 +79,10 @@ class CreatePerson extends React.Component {
             placeholder="add an age"
             onChange={(e) => {
               this.setState({ age: e.target.value });
-              hideCross('age', e.target.value);
             }}
+            onInvalid={(e) => validation(e)}
+            required={true}
           />
-          <img className="validation-cross" src="cross.svg" alt="cross" />
         </div>
         <div className="modal-item-container country-container">
           Country{' '}
@@ -135,10 +93,10 @@ class CreatePerson extends React.Component {
             placeholder="add a country"
             onChange={(e) => {
               this.setState({ country: e.target.value });
-              hideCross('country', e.target.value);
             }}
+            onInvalid={(e) => validation(e)}
+            required={true}
           />
-          <img className="validation-cross" src="cross.svg" alt="cross" />
         </div>
         <div className="modal-item-container number-container">
           Tel number{' '}
@@ -149,23 +107,23 @@ class CreatePerson extends React.Component {
             placeholder="add a number"
             onChange={(e) => {
               this.setState({ tel: e.target.value });
-              hideCross('number', e.target.value);
             }}
+            onInvalid={(e) => validation(e)}
+            required={true}
           />
-          <img className="validation-cross" src="cross.svg" alt="cross" />
         </div>
         <div className="modal-item-container mail-container">
           EMail{' '}
           <input
             className="input input-modal-mail"
-            type="text"
+            type="email"
             placeholder="add a mail"
             onChange={(e) => {
               this.setState({ mail: e.target.value });
-              hideCross('mail', e.target.value);
             }}
+            onInvalid={(e) => validation(e)}
+            required={true}
           />
-          <img className="validation-cross" src="cross.svg" alt="cross" />
         </div>
         <span className="link-or-file">Link or file</span>
         <div className="photo-container">
@@ -176,7 +134,6 @@ class CreatePerson extends React.Component {
               placeholder="add a link"
               onChange={(e) => {
                 this.setState({ src: e.target.value });
-                hideCross('src', e.target.value);
               }}
             />
             <img className="validation-cross" src="cross.svg" alt="cross" />
@@ -219,8 +176,9 @@ class CreatePerson extends React.Component {
               type="date"
               onChange={(e) => {
                 this.setState({ birthday: e.target.value });
-                hideCross('date', e.target.value);
               }}
+              onInvalid={(e) => validation(e)}
+              required={true}
             />
             <img className="validation-cross" src="cross.svg" alt="cross" />
           </div>
@@ -231,6 +189,7 @@ class CreatePerson extends React.Component {
               onChange={(e) => {
                 this.setState({ sphere: e.target.value });
               }}
+              required={true}
             >
               <option value="first" disabled>
                 Choose the right one
@@ -249,6 +208,7 @@ class CreatePerson extends React.Component {
               onChange={(e) => {
                 this.setState({ movie: e.target.checked });
               }}
+              onInvalid={(e) => validation(e)}
             />
             <img className="validation-cross" src="cross.svg" alt="cross" />
           </div>
@@ -263,8 +223,9 @@ class CreatePerson extends React.Component {
                 type="radio"
                 onChange={(e) => {
                   this.setState({ gender: e.target.id.toUpperCase()[0] });
-                  hideCross('gender', e.target.value);
                 }}
+                onInvalid={(e) => validation(e)}
+                required={true}
               />
               woman
               <input
@@ -274,8 +235,12 @@ class CreatePerson extends React.Component {
                 type="radio"
                 onChange={(e) => {
                   this.setState({ gender: e.target.id.toUpperCase()[0] });
-                  hideCross('gender', e.target.value);
                 }}
+                onInvalid={(e) => {
+                  const element = e.target as HTMLInputElement;
+                  (element.parentElement as HTMLLabelElement).style.border = '2px solid red';
+                }}
+                required={true}
               />
             </label>
             <img className="validation-cross" src="cross.svg" alt="cross" />
@@ -284,10 +249,8 @@ class CreatePerson extends React.Component {
         <button
           type="submit"
           className="btn-add-new-person"
-          onClick={function (e) {
-            e.preventDefault();
-            validated();
-            // window.location.pathname = '/';
+          onClick={function () {
+            addPerson();
           }}
         >
           Add a new person

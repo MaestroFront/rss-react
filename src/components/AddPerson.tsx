@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const AddPerson = function () {
+export const AddPerson = function () {
   return (
     <>
       <Link className="link-add-person" to={'/add-person'}>

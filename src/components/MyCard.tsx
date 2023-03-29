@@ -15,7 +15,7 @@ export interface ICard {
   movie: string;
 }
 
-const MyCard = function (props: ICard) {
+export const MyCard = function (props: ICard) {
   const deletePerson = (id: string) => {
     const cards = document.querySelectorAll('.card') as NodeListOf<HTMLDivElement>;
     const persons = JSON.parse(localStorage.getItem('client') as string) as ICard[];
