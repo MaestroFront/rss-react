@@ -42,7 +42,14 @@ class CreatePerson extends React.Component {
         } else {
           localStorage.setItem('client', JSON.stringify([this.state]));
         }
+        showMessage();
       }
+    };
+
+    const showMessage = () => {
+      const message = document.querySelector('.success-adding');
+      message?.classList.add('show');
+      setTimeout(() => message?.classList.remove('show'), 2000);
     };
 
     return (
@@ -160,7 +167,6 @@ class CreatePerson extends React.Component {
                 this.setState({ src: e.target.value });
               }}
             />
-            <img className="validation-cross" src="cross.svg" alt="cross" />
           </div>
           <span>or</span>
           <div className="modal-item-container file-container">
@@ -189,7 +195,6 @@ class CreatePerson extends React.Component {
               }}
             />
             <img className="test-img" src="" alt="" />
-            <img className="validation-cross" src="cross.svg" alt="cross" />
           </div>
         </div>
         <div className="other-info-container">
@@ -207,7 +212,6 @@ class CreatePerson extends React.Component {
               onInvalid={(e) => validation(e)}
               required={true}
             />
-            <img className="validation-cross" src="cross.svg" alt="cross" />
           </div>
           <div className="modal-item-container select-container">
             Choose a sphere{' '}
@@ -225,7 +229,6 @@ class CreatePerson extends React.Component {
               <option value="movie">movie</option>
               <option value="other">other </option>
             </select>
-            <img className="validation-cross" src="cross.svg" alt="cross" />
           </div>
           <div className="modal-item-container starred-container">
             Starred in a movie
@@ -240,7 +243,6 @@ class CreatePerson extends React.Component {
               }}
               onInvalid={(e) => validation(e)}
             />
-            <img className="validation-cross" src="cross.svg" alt="cross" />
           </div>
           <div className="modal-item-container gender-container">
             Choose a gender
@@ -281,18 +283,12 @@ class CreatePerson extends React.Component {
                 required={true}
               />
             </label>
-            <img className="validation-cross" src="cross.svg" alt="cross" />
           </div>
         </div>
-        <button
-          type="submit"
-          className="btn-add-new-person"
-          onClick={function () {
-            addPerson();
-          }}
-        >
+        <button type="submit" className="btn-add-new-person" onClick={() => addPerson()}>
           Add a new person
         </button>
+        <div className="success-adding">Person are added!</div>
       </form>
     );
   }

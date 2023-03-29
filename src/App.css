@@ -306,3 +306,23 @@
   top: 10px;
   right: 50px;
 }
+
+.success-adding {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20%;
+  height: 20%;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(0);
+}
+
+.success-adding.show {
+  transform: scale(1);
+}
