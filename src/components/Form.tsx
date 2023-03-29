@@ -1,4 +1,4 @@
-import React, { Component, ReactEventHandler } from 'react';
+import React, { Component } from 'react';
 
 class Form extends Component {
   state = {
@@ -11,53 +11,16 @@ class Form extends Component {
     src: '',
     id: '',
     movie: 'false',
+    isNameValid: true,
   };
 
-  nameRef = React.createRef();
-  genderRef = React.createRef();
-  fileRef = React.createRef();
-  birthdayRef = React.createRef();
-  sphereRef = React.createRef();
-  mailRef = React.createRef();
-  movieRef = React.createRef();
-
-  handleNameChange = () => {
-    this.setState({
-      name: this.nameRef.current.value,
-      id: this.nameRef.current.value,
-    });
-  };
-  handleGenderChange = (e: Event) => {
-    const element = e.target as HTMLInputElement;
-    this.setState({
-      gender: element.id.toUpperCase()[0],
-    });
-  };
-  handleFileChange = () => {
-    this.setState({
-      file: this.fileRef.current.value,
-    });
-  };
-  handleBirthdayChange = () => {
-    this.setState({
-      birthday: this.birthdayRef.current.value,
-    });
-  };
-  handleSphereChange = () => {
-    this.setState({
-      sphere: this.sphereRef.current.value,
-    });
-  };
-  handleMailChange = () => {
-    this.setState({
-      mail: this.mailRef.current.value,
-    });
-  };
-  handleMovieChange = () => {
-    this.setState({
-      movie: this.movieRef.current.value,
-    });
-  };
+  nameRef: React.RefObject<HTMLInputElement> = React.createRef();
+  genderRef: React.RefObject<HTMLInputElement> = React.createRef();
+  fileRef: React.RefObject<HTMLInputElement> = React.createRef();
+  birthdayRef: React.RefObject<HTMLInputElement> = React.createRef();
+  sphereRef: React.RefObject<HTMLSelectElement> = React.createRef();
+  mailRef: React.RefObject<HTMLInputElement> = React.createRef();
+  movieRef: React.RefObject<HTMLInputElement> = React.createRef();
 
   showMessage = () => {
     const message = document.querySelector('.success-adding');
@@ -65,7 +28,7 @@ class Form extends Component {
     setTimeout(() => message?.classList.remove('show'), 2000);
   };
 
-  handleShow = (e: Event) => {
+  handleShow = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     this.setState({
       name: '',
@@ -78,13 +41,38 @@ class Form extends Component {
       movie: 'false',
       file: '',
     });
+    const resObj = {
+      name: this.nameRef.current?.value,
+      gender: this.genderRef.current?.id.toUpperCase()[0],
+      birthday: this.birthdayRef.current?.value,
+      sphere: this.sphereRef.current?.value,
+      mail: '',
+      src: '',
+      id: '',
+      movie: 'false',
+      file: this.fileRef.current?.value,
+    };
+
+    if (this.nameRef.current && this.nameRef.current.value.length < 10) {
+      this.setState({
+        isNameValid: false,
+      });
+    } else if (!this.state.isNameValid) {
+      this.setState({
+        isNameValid: true,
+      });
+    }
+
+    // if (this.nameRef.current) {
+    //   this.nameRef.current.value = '';
+    // }
     const res = localStorage.getItem('client') as string;
     let total = 0;
     Object.values(this.state).forEach((item) => {
       if (`${item}`.length !== 0) total++;
     });
-    console.log(this.state);
-    console.log(total);
+    // console.log(this.state);
+    // console.log(total);
     if (total >= 6) {
       if (res) {
         const resJson = JSON.parse(res);
@@ -109,11 +97,14 @@ class Form extends Component {
           Name
           <input
             ref={this.nameRef}
-            className="input input-modal-name"
+            className={
+              this.state.isNameValid
+                ? 'input input-modal-name'
+                : 'input input-modal-name input--error'
+            }
             type="text"
             placeholder="add a name"
             onInvalid={this.validation}
-            onChange={() => this.handleNameChange()}
           />
         </div>
         <div className="modal-item-container mail-container">
@@ -123,7 +114,6 @@ class Form extends Component {
             className="input input-modal-mail"
             type="email"
             placeholder="add a mail"
-            onChange={() => this.handleMailChange()}
           />
         </div>
         <span className="link-or-file">File image</span>
@@ -151,23 +141,17 @@ class Form extends Component {
                   reader.readAsDataURL(element.files[0]);
                 }
               }
-              this.handleFileChange();
             }}
           />
         </div>
         <div className="other-info-container">
           <div className="modal-item-container date-container">
             Date of Birthday{' '}
-            <input
-              ref={this.birthdayRef}
-              className="input input-modal-date"
-              type="date"
-              onChange={() => this.handleBirthdayChange()}
-            />
+            <input ref={this.birthdayRef} className="input input-modal-date" type="date" />
           </div>
           <div className="modal-item-container select-container">
             Choose a sphere{' '}
-            <select className="select-sphere" defaultValue={'first'}>
+            <select ref={this.sphereRef} className="select-sphere" defaultValue={'first'}>
               <option value="first" disabled>
                 Choose the right one
               </option>
@@ -190,7 +174,6 @@ class Form extends Component {
                 id="man"
                 className="input input-modal-gender-man"
                 type="radio"
-                onChange={(e) => this.handleGenderChange(e)}
               />
               woman
               <input
@@ -199,7 +182,6 @@ class Form extends Component {
                 id="woman"
                 className="input input-modal-gender-woman"
                 type="radio"
-                onChange={(e) => this.handleGenderChange(e)}
               />
             </label>
           </div>

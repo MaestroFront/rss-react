@@ -330,3 +330,8 @@
 .success-adding.show {
   transform: scale(1);
 }
+
+.input--error {
+  border: 2px solid red;
+  color: red;
+}
