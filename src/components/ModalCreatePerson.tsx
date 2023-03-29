@@ -33,7 +33,6 @@ class CreatePerson extends React.Component {
       Object.values(this.state).forEach((item) => {
         if (`${item}`.length !== 0) total++;
       });
-      console.log(total);
 
       if (total >= 11) {
         if (res) {
@@ -56,6 +55,9 @@ class CreatePerson extends React.Component {
             maxLength={20}
             placeholder="add a name"
             onChange={(e) => {
+              if (e.target.value) {
+                e.target.style.border = '1px solid black';
+              }
               this.setState({ name: e.target.value });
             }}
             onInvalid={(e) => validation(e)}
@@ -70,6 +72,9 @@ class CreatePerson extends React.Component {
             maxLength={20}
             placeholder="add a surname"
             onChange={(e) => {
+              if (e.target.value) {
+                e.target.style.border = '1px solid black';
+              }
               this.setState({ surname: e.target.value });
               this.setState({ id: e.target.value });
             }}
@@ -85,6 +90,9 @@ class CreatePerson extends React.Component {
             max={100}
             placeholder="add an age"
             onChange={(e) => {
+              if (e.target.value) {
+                e.target.style.border = '1px solid black';
+              }
               this.setState({ age: e.target.value });
             }}
             onInvalid={(e) => validation(e)}
@@ -99,6 +107,9 @@ class CreatePerson extends React.Component {
             maxLength={10}
             placeholder="add a country"
             onChange={(e) => {
+              if (e.target.value) {
+                e.target.style.border = '1px solid black';
+              }
               this.setState({ country: e.target.value });
             }}
             onInvalid={(e) => validation(e)}
@@ -113,6 +124,9 @@ class CreatePerson extends React.Component {
             maxLength={11}
             placeholder="add a number"
             onChange={(e) => {
+              if (e.target.value) {
+                e.target.style.border = '1px solid black';
+              }
               this.setState({ tel: e.target.value });
             }}
             onInvalid={(e) => validation(e)}
@@ -126,6 +140,9 @@ class CreatePerson extends React.Component {
             type="email"
             placeholder="add a mail"
             onChange={(e) => {
+              if (e.target.value) {
+                e.target.style.border = '1px solid black';
+              }
               this.setState({ mail: e.target.value });
             }}
             onInvalid={(e) => validation(e)}
@@ -182,6 +199,9 @@ class CreatePerson extends React.Component {
               className="input input-modal-date"
               type="date"
               onChange={(e) => {
+                if (e.target.value) {
+                  e.target.style.border = '1px solid black';
+                }
                 this.setState({ birthday: e.target.value });
               }}
               onInvalid={(e) => validation(e)}
@@ -213,6 +233,9 @@ class CreatePerson extends React.Component {
               className="input input-modal-starred"
               type="checkbox"
               onChange={(e) => {
+                if (e.target.value) {
+                  e.target.style.border = '1px solid black';
+                }
                 this.setState({ movie: e.target.checked });
               }}
               onInvalid={(e) => validation(e)}
@@ -229,6 +252,10 @@ class CreatePerson extends React.Component {
                 className="input input-modal-gender-man"
                 type="radio"
                 onChange={(e) => {
+                  const element = e.target as HTMLInputElement;
+                  if (element.checked === true) {
+                    (element.parentElement as HTMLLabelElement).style.border = 'none';
+                  }
                   this.setState({ gender: e.target.id.toUpperCase()[0] });
                 }}
                 onInvalid={(e) => validation(e)}
@@ -241,6 +268,10 @@ class CreatePerson extends React.Component {
                 className="input input-modal-gender-woman"
                 type="radio"
                 onChange={(e) => {
+                  const element = e.target as HTMLInputElement;
+                  if (element.checked === true) {
+                    (element.parentElement as HTMLLabelElement).style.border = 'none';
+                  }
                   this.setState({ gender: e.target.id.toUpperCase()[0] });
                 }}
                 onInvalid={(e) => {
