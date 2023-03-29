@@ -28,14 +28,21 @@ class CreatePerson extends React.Component {
     };
 
     const addPerson = () => {
-      const res = localStorage.getItem('client');
+      const res = localStorage.getItem('client') as string;
+      let total = 0;
+      Object.values(this.state).forEach((item) => {
+        if (`${item}`.length !== 0) total++;
+      });
+      console.log(total);
 
-      if (res) {
-        const resJson = JSON.parse(res);
-        resJson.push(this.state);
-        localStorage.setItem('client', JSON.stringify(resJson));
-      } else {
-        localStorage.setItem('client', JSON.stringify([this.state]));
+      if (total >= 11) {
+        if (res) {
+          const resJson = JSON.parse(res);
+          resJson.push(this.state);
+          localStorage.setItem('client', JSON.stringify(resJson));
+        } else {
+          localStorage.setItem('client', JSON.stringify([this.state]));
+        }
       }
     };
 
