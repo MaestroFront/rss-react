@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import AboutUs from './AboutUs';
+import AboutUs from '../pages/AboutUs';
 
 it('there is rs school link', () => {
   render(<AboutUs />);
