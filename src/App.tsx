@@ -20,7 +20,9 @@ function App() {
           <Route path="*" element={<ErrorPage />}></Route>
         </Routes>
       </main>
-      <div className="success-adding">Person are added!</div>
+      <div className="success-adding">
+        <p className="success-adding-text">Person are added!</p>
+      </div>
       <Footer />
     </>
   );

@@ -7,6 +7,10 @@
   width: 0px;
 }
 
+#root {
+  position: relative;
+}
+
 .header {
   width: 100%;
   display: flex;
@@ -313,25 +317,32 @@
 }
 
 .success-adding {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
-  width: 20%;
-  height: 20%;
-  background-color: white;
-  border: 2px solid black;
-  border-radius: 20px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .7);
   display: flex;
   justify-content: center;
   align-items: center;
   transform: translate(-50%, -50%) scale(0);
 }
 
+.success-adding-text {
+  border-radius: 20px;
+  background-color: white;
+  width: 20%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .success-adding.show {
-  transform: scale(1);
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .input--error {
   border: 2px solid red;
-  color: red;
 }

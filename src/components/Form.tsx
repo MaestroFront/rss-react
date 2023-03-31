@@ -1,32 +1,33 @@
 import React, { Component } from 'react';
+import { addPerson } from '../helpers/helpers';
 
 class Form extends Component {
   state = {
     name: '',
     gender: '',
     birthday: '',
-    sphere: 'sport',
+    sphere: '',
     file: '',
     mail: '',
     src: '',
     id: '',
-    movie: 'false',
+    movie: 'no',
     isNameValid: true,
+    isMailValid: true,
+    isFileValid: true,
+    isBirthdayValid: true,
+    isSphereValid: true,
+    isGenderValid: true,
   };
 
   nameRef: React.RefObject<HTMLInputElement> = React.createRef();
-  genderRef: React.RefObject<HTMLInputElement> = React.createRef();
+  genderManRef: React.RefObject<HTMLInputElement> = React.createRef();
+  genderWomanRef: React.RefObject<HTMLInputElement> = React.createRef();
   fileRef: React.RefObject<HTMLInputElement> = React.createRef();
   birthdayRef: React.RefObject<HTMLInputElement> = React.createRef();
   sphereRef: React.RefObject<HTMLSelectElement> = React.createRef();
   mailRef: React.RefObject<HTMLInputElement> = React.createRef();
   movieRef: React.RefObject<HTMLInputElement> = React.createRef();
-
-  showMessage = () => {
-    const message = document.querySelector('.success-adding');
-    message?.classList.add('show');
-    setTimeout(() => message?.classList.remove('show'), 2000);
-  };
 
   handleShow = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -34,26 +35,29 @@ class Form extends Component {
       name: '',
       gender: '',
       birthday: '',
-      sphere: 'sport',
+      sphere: '',
       mail: '',
-      src: '',
       id: '',
-      movie: 'false',
+      movie: 'no',
       file: '',
     });
+
     const resObj = {
       name: this.nameRef.current?.value,
-      gender: this.genderRef.current?.id.toUpperCase()[0],
+      gender: '',
+      genderMan: this.genderManRef.current?.checked,
+      genderWoman: this.genderWomanRef.current?.checked,
       birthday: this.birthdayRef.current?.value,
       sphere: this.sphereRef.current?.value,
-      mail: '',
-      src: '',
-      id: '',
-      movie: 'false',
+      mail: this.mailRef.current?.value,
+      id: this.nameRef.current?.value,
+      movie: this.movieRef.current?.checked,
       file: this.fileRef.current?.value,
     };
 
-    if (this.nameRef.current && this.nameRef.current.value.length < 10) {
+    resObj.genderMan === true ? (resObj.gender = 'M') : (resObj.gender = 'W');
+
+    if (this.nameRef.current && this.nameRef.current.value.length < 2) {
       this.setState({
         isNameValid: false,
       });
@@ -63,31 +67,91 @@ class Form extends Component {
       });
     }
 
-    // if (this.nameRef.current) {
-    //   this.nameRef.current.value = '';
-    // }
-    const res = localStorage.getItem('client') as string;
-    let total = 0;
-    Object.values(this.state).forEach((item) => {
-      if (`${item}`.length !== 0) total++;
-    });
-    // console.log(this.state);
-    // console.log(total);
-    if (total >= 6) {
-      if (res) {
-        const resJson = JSON.parse(res);
-        resJson.push(this.state);
-        localStorage.setItem('client', JSON.stringify(resJson));
-      } else {
-        localStorage.setItem('client', JSON.stringify([this.state]));
-      }
-      this.showMessage();
+    if (this.mailRef.current && !this.mailRef.current.value.includes('@' && ('.ru' || '.com'))) {
+      this.setState({
+        isMailValid: false,
+      });
+    } else if (!this.state.isMailValid) {
+      this.setState({
+        isMailValid: true,
+      });
     }
-  };
 
-  validation = (e: React.FormEvent<HTMLInputElement>) => {
-    const element = e.target as HTMLInputElement;
-    element.style.border = '2px solid red';
+    if (this.fileRef.current && this.fileRef.current.value === '') {
+      this.setState({
+        isFileValid: false,
+      });
+    } else if (!this.state.isFileValid) {
+      this.setState({
+        isFileValid: true,
+      });
+    }
+
+    if (this.birthdayRef.current && this.birthdayRef.current.value === '') {
+      this.setState({
+        isBirthdayValid: false,
+      });
+    } else if (!this.state.isBirthdayValid) {
+      this.setState({
+        isBirthdayValid: true,
+      });
+    }
+
+    if (this.sphereRef.current && this.sphereRef.current.value === 'nothing') {
+      this.setState({
+        isSphereValid: false,
+      });
+    } else if (!this.state.isSphereValid) {
+      this.setState({
+        isSphereValid: true,
+      });
+    }
+
+    if (
+      this.genderManRef.current &&
+      this.genderWomanRef.current &&
+      this.genderManRef.current.checked === false &&
+      this.genderWomanRef.current.checked === false
+    ) {
+      this.setState({
+        isGenderValid: false,
+      });
+    } else if (!this.state.isGenderValid) {
+      this.setState({
+        isGenderValid: true,
+      });
+    }
+
+    if (
+      this.nameRef.current &&
+      this.nameRef.current.value !== '' &&
+      this.genderManRef.current &&
+      this.genderWomanRef.current &&
+      (this.genderManRef.current.checked === true ||
+        this.genderWomanRef.current.checked === true) &&
+      this.birthdayRef.current &&
+      this.birthdayRef.current.value !== '' &&
+      this.mailRef.current &&
+      this.mailRef.current.value.includes('@' && ('.ru' || '.com')) &&
+      this.sphereRef.current &&
+      (this.sphereRef.current.value === 'IT' ||
+        this.sphereRef.current.value === 'movie' ||
+        this.sphereRef.current.value === 'sport' ||
+        this.sphereRef.current.value === 'other') &&
+      this.movieRef.current &&
+      this.fileRef.current &&
+      this.fileRef.current.value !== ''
+    ) {
+      this.nameRef.current.value = '';
+      this.genderManRef.current.checked = false;
+      this.genderWomanRef.current.checked = false;
+      this.birthdayRef.current.value = '';
+      this.mailRef.current.value = '';
+      this.sphereRef.current.value = 'nothing';
+      this.movieRef.current.checked = false;
+      this.fileRef.current.value = '';
+      addPerson(resObj);
+    }
   };
 
   render() {
@@ -104,14 +168,17 @@ class Form extends Component {
             }
             type="text"
             placeholder="add a name"
-            onInvalid={this.validation}
           />
         </div>
         <div className="modal-item-container mail-container">
           EMail
           <input
             ref={this.mailRef}
-            className="input input-modal-mail"
+            className={
+              this.state.isMailValid
+                ? 'input input-modal-mail'
+                : 'input input-modal-mail input--error'
+            }
             type="email"
             placeholder="add a mail"
           />
@@ -120,7 +187,11 @@ class Form extends Component {
         <div className="modal-item-container file-container">
           <input
             ref={this.fileRef}
-            className="input input-modal-file"
+            className={
+              this.state.isFileValid
+                ? 'input input-modal-file'
+                : 'input input-modal-file input--error'
+            }
             type="file"
             accept="image/png, image/jpeg"
             onChange={(e) => {
@@ -147,41 +218,59 @@ class Form extends Component {
         <div className="other-info-container">
           <div className="modal-item-container date-container">
             Date of Birthday{' '}
-            <input ref={this.birthdayRef} className="input input-modal-date" type="date" />
+            <input
+              ref={this.birthdayRef}
+              className={
+                this.state.isBirthdayValid
+                  ? 'input input-modal-date'
+                  : 'input input-modal-date input--error'
+              }
+              type="date"
+            />
           </div>
           <div className="modal-item-container select-container">
             Choose a sphere{' '}
-            <select ref={this.sphereRef} className="select-sphere" defaultValue={'first'}>
-              <option value="first" disabled>
-                Choose the right one
+            <select
+              ref={this.sphereRef}
+              className={this.state.isSphereValid ? 'select-sphere' : 'select-sphere input--error'}
+              defaultValue={'nothing'}
+            >
+              <option value="nothing" disabled>
+                nothing
               </option>
               <option value="sport">sport</option>
               <option value="movie">movie</option>
+              <option value="IT">IT</option>
               <option value="other">other </option>
             </select>
           </div>
           <div className="modal-item-container starred-container">
             Starred in a movie
-            <input className="input input-modal-starred" type="checkbox" />
+            <input ref={this.movieRef} className="input input-modal-starred" type="checkbox" />
           </div>
           <div className="modal-item-container gender-container">
             Choose a gender
-            <label className="label-gender" htmlFor="gender">
+            <label
+              className={this.state.isGenderValid ? 'label-gender' : 'label-gender input--error'}
+              htmlFor="gender"
+            >
               man
               <input
-                ref={this.genderRef}
+                ref={this.genderManRef}
                 name="gender"
-                id="man"
+                id="M"
                 className="input input-modal-gender-man"
                 type="radio"
+                defaultValue={'man'}
               />
               woman
               <input
-                ref={this.genderRef}
+                ref={this.genderWomanRef}
                 name="gender"
-                id="woman"
+                id="W"
                 className="input input-modal-gender-woman"
                 type="radio"
+                defaultValue={'woman'}
               />
             </label>
           </div>

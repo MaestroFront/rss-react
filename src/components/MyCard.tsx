@@ -33,12 +33,27 @@ export const MyCard = function (props: ICard) {
     }
   };
 
+  const randomNumber = () => Math.floor(Math.random() * 10000);
+
   let movie = '';
 
   props.movie === 'true' ? (movie = 'yes') : (movie = 'no');
 
   return (
-    <div className="card" id={props.name}>
+    <div
+      className="card"
+      id={
+        props.name.split(' ')[0] +
+        '-' +
+        props.gender +
+        '-' +
+        props.sphere +
+        '-' +
+        props.birthday +
+        ':' +
+        randomNumber()
+      }
+    >
       <div className="card__image-container">
         <img className="image" src={showImage(props)} alt={props.name} />
       </div>
