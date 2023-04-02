@@ -10,14 +10,6 @@
 
 # production
 # /build
-/public
-/src
-.eslintrc.json
-.prettierrc
-.babel.config.json
-package-lock.json
-package.json
-settings.json
 tsconfig.jsonyarn.lock
 
 # misc
