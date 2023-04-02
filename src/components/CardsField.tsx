@@ -1,5 +1,6 @@
 import React from 'react';
-import MyCard, { ICard } from './MyCard';
+import MyCard from './MyCard';
+import { ICard } from '../types/app.interface';
 import { personsData } from '../data/data';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -27,7 +28,7 @@ class CardsField extends React.Component<any, any> {
     return (
       <div className="cards-field">
         {this.state.client.map((item: ICard, index: number) => {
-          const { name, gender, birthday, sphere, mail, file, src, movie } = item || {};
+          const { name, gender, birthday, sphere, mail, file, src, movie, id } = item || {};
 
           return (
             <React.Fragment key={index}>
@@ -39,7 +40,7 @@ class CardsField extends React.Component<any, any> {
                 mail={mail}
                 src={src}
                 file={file}
-                id={name}
+                id={id}
                 movie={movie}
               />
             </React.Fragment>

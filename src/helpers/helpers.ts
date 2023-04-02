@@ -1,8 +1,8 @@
+import { ICard } from '../types/app.interface';
+
 interface IResObj {
   name: string | undefined;
   gender: string | undefined;
-  genderMan: boolean | undefined;
-  genderWoman: boolean | undefined;
   birthday: string | undefined;
   sphere: string | undefined;
   mail: string | undefined;
@@ -23,7 +23,7 @@ export const addPerson = (obj: IResObj) => {
   Object.values(obj).forEach((item) => {
     if (`${item}`.length !== 0) total++;
   });
-  if (total >= 10) {
+  if (total >= 7) {
     if (res) {
       const resJson = JSON.parse(res);
       resJson.push(obj);
@@ -33,4 +33,18 @@ export const addPerson = (obj: IResObj) => {
     }
     showMessage();
   }
+};
+
+export const createID = (obj: ICard) => {
+  return (
+    obj.name.split(' ')[0] +
+    '-' +
+    obj.gender +
+    '-' +
+    obj.sphere +
+    '-' +
+    obj.birthday +
+    ':' +
+    Math.floor(Math.random() * 10000)
+  );
 };

@@ -1,16 +1,5 @@
 import React from 'react';
-
-export interface ICard {
-  name: string;
-  gender: string;
-  birthday: string;
-  sphere: string;
-  mail: string;
-  src: string;
-  id: string;
-  movie: string;
-  file: string;
-}
+import { ICard } from '../types/app.interface';
 
 export const MyCard = function (props: ICard) {
   const deletePerson = (id: string) => {
@@ -33,27 +22,12 @@ export const MyCard = function (props: ICard) {
     }
   };
 
-  const randomNumber = () => Math.floor(Math.random() * 10000);
-
   let movie = '';
 
-  props.movie === 'true' ? (movie = 'yes') : (movie = 'no');
+  props.movie === true ? (movie = 'yes') : (movie = 'no');
 
   return (
-    <div
-      className="card"
-      id={
-        props.name.split(' ')[0] +
-        '-' +
-        props.gender +
-        '-' +
-        props.sphere +
-        '-' +
-        props.birthday +
-        ':' +
-        randomNumber()
-      }
-    >
+    <div className="card" id={props.id}>
       <div className="card__image-container">
         <img className="image" src={showImage(props)} alt={props.name} />
       </div>
