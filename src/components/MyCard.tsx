@@ -33,7 +33,7 @@ export const MyCard = function (props: ICard) {
       </div>
       <h3 className="card-name">{props.name}</h3>
       <div className="card__info">
-        <span>{props.gender}</span>
+        <span>{props.gender.toUpperCase()[0]}</span>
       </div>
       <div className="birthday">{props.birthday}</div>
       <div className="sphere">Sphere: {props.sphere}</div>
