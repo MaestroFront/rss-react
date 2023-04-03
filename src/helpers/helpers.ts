@@ -11,12 +11,6 @@ interface IResObj {
   file: string | undefined;
 }
 
-const showMessage = () => {
-  const message = document.querySelector('.success-adding');
-  message?.classList.add('show');
-  setTimeout(() => message?.classList.remove('show'), 2000);
-};
-
 export const addPerson = (obj: IResObj) => {
   const res = localStorage.getItem('client') as string;
   let total = 0;
@@ -31,7 +25,6 @@ export const addPerson = (obj: IResObj) => {
     } else {
       localStorage.setItem('client', JSON.stringify([obj]));
     }
-    showMessage();
   }
 };
 
