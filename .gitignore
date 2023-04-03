@@ -10,6 +10,7 @@
 
 # production
 # /build
+tsconfig.jsonyarn.lock
 
 >>>>>>> react-start
 # misc
