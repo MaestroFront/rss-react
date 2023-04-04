@@ -1,9 +1,8 @@
-import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { ICard } from '../types/app.interface';
+import { ICard } from '../types/interfaces';
 import { addPerson, createID } from '../helpers/helpers';
 
-function formCard() {
+function FormCard() {
   const {
     register,
     handleSubmit,
@@ -153,4 +152,4 @@ function formCard() {
   );
 }
 
-export default formCard;
+export default FormCard;

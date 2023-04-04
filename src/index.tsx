@@ -4,12 +4,11 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
-const root = ReactDOM.createRoot(
-  // eslint-disable-next-line prettier/prettier
-  document.querySelector('#root') as HTMLDivElement
-);
+const root = ReactDOM.createRoot(document.querySelector('#root') as HTMLDivElement);
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
 );

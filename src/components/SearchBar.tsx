@@ -1,10 +1,20 @@
-import React from 'react';
-import AddPerson from './AddPerson';
+import { Link } from 'react-router-dom';
+import { filterCards, installValue } from '../helpers/helpers';
 
 export const SearchBar = function () {
   return (
     <form className="search-bar">
-      <input type="text" className="input-search" />
+      <input
+        type="text"
+        className="input-search"
+        placeholder="try to search a person"
+        onChange={(e) => {
+          const element = e.target as HTMLInputElement;
+          localStorage.setItem('search', element.value);
+          filterCards(element.value);
+        }}
+        defaultValue={installValue()}
+      />
       <button
         className="btn-search"
         onClick={(e) => {
@@ -13,7 +23,9 @@ export const SearchBar = function () {
       >
         Search
       </button>
-      <AddPerson />
+      <Link className="link-add-person" to={'/add-person'}>
+        Add a person
+      </Link>
     </form>
   );
 };

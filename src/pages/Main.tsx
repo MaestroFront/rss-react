@@ -1,12 +1,16 @@
-import React from 'react';
 import CardsField from '../components/CardsField';
 import SearchBar from '../components/SearchBar';
+import { createOrUpdateCards } from '../helpers/helpers';
 
 const MainPage = function () {
   return (
     <>
       <SearchBar />
-      <CardsField />
+      <CardsField
+        state={{
+          client: createOrUpdateCards(),
+        }}
+      />
     </>
   );
 };

@@ -6,6 +6,6 @@ export interface ICard {
   mail: string;
   movie: boolean;
   file: string;
-  id: string;
   src: string;
+  id: string;
 }

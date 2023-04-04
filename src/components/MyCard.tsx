@@ -1,27 +1,7 @@
-import React from 'react';
-import { ICard } from '../types/app.interface';
+import { deletePerson, showImage } from '../helpers/helpers';
+import { ICard } from '../types/interfaces';
 
 export const MyCard = function (props: ICard) {
-  const deletePerson = (id: string) => {
-    const cards = document.querySelectorAll('.card') as NodeListOf<HTMLDivElement>;
-    const persons = JSON.parse(localStorage.getItem('client') as string) as ICard[];
-    const indexDelete = persons.findIndex((el) => el.id === id);
-    persons.splice(indexDelete, 1);
-    localStorage.setItem('client', JSON.stringify(persons));
-    cards.forEach((el) => {
-      if (el.id === id) el.remove();
-    });
-    localStorage.removeItem(`${props.name}`);
-  };
-
-  const showImage = (props: ICard) => {
-    if (localStorage.getItem(props.name) as string) {
-      return localStorage.getItem(props.name) as string;
-    } else {
-      return props.src;
-    }
-  };
-
   let movie = '';
 
   props.movie === true ? (movie = 'yes') : (movie = 'no');
@@ -42,10 +22,9 @@ export const MyCard = function (props: ICard) {
         <button>Info</button>
         <button
           onClick={(e) => {
-            // eslint-disable-next-line prettier/prettier
             const element = e.target as HTMLButtonElement;
             const id = element.parentElement?.parentElement?.id as string;
-            deletePerson(id);
+            deletePerson(props, id);
           }}
         >
           Delete

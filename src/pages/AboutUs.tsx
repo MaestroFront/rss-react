@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const AboutUs = function () {
   return (
     <ul className="aboutus-container">
