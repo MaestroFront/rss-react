@@ -1,4 +1,3 @@
-import CardsField from '../components/CardsField';
 import { personsData } from '../data/data';
 import { ICard } from '../types/interfaces';
 
