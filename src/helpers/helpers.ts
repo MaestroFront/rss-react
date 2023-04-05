@@ -68,19 +68,6 @@ export const filterCards = (value: string): void => {
   const cards = JSON.parse(localStorage.getItem('client') as string);
   const newCards = cards.filter((card: ICard) => card.name.includes(value));
   localStorage.setItem('clent-filter', JSON.stringify(newCards));
-  console.log(newCards);
-};
-
-export const deletePerson = (props: ICard, id: string) => {
-  const cards = document.querySelectorAll('.card') as NodeListOf<HTMLDivElement>;
-  const persons = JSON.parse(localStorage.getItem('client') as string) as ICard[];
-  const indexDelete = persons.findIndex((el) => el.id === id);
-  persons.splice(indexDelete, 1);
-  localStorage.setItem('client', JSON.stringify(persons));
-  cards.forEach((el) => {
-    if (el.id === id) el.remove();
-  });
-  localStorage.removeItem(`${props.name}`);
 };
 
 export const showImage = (props: ICard) => {

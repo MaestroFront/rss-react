@@ -63,14 +63,11 @@ function FormCard() {
             if (element.files && element.files[0]) {
               if (element.files[0].type.match('image.*')) {
                 const reader = new FileReader();
-                reader.onload = function (el) {
-                  const element = el.target as FileReader | null;
-                  if (element?.result) {
-                    const src = element.result as string;
-                    localStorage.setItem(
-                      (document.querySelector('.input-modal-name') as HTMLInputElement).value,
-                      src
-                    );
+                reader.onload = function (e) {
+                  const el = e.target as FileReader | null;
+                  if (el?.result) {
+                    const src = el.result as string;
+                    localStorage.setItem(element.value, src);
                   }
                 };
                 reader.readAsDataURL(element.files[0]);
@@ -154,9 +151,7 @@ function FormCard() {
           <button
             className="btn btn-cross"
             title="close window"
-            onClick={(e) => {
-              const element = e.target as HTMLButtonElement;
-              element.parentElement?.remove();
+            onClick={() => {
               localStorage.setItem('validation', 'false');
             }}
           >

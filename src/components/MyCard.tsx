@@ -1,4 +1,4 @@
-import { deletePerson, showImage } from '../helpers/helpers';
+import { showImage } from '../helpers/helpers';
 import { ICard } from '../types/interfaces';
 
 export const MyCard = function (props: ICard) {
@@ -18,18 +18,6 @@ export const MyCard = function (props: ICard) {
       <div className="birthday">{props.birthday}</div>
       <div className="sphere">Sphere: {props.sphere}</div>
       <div className="movie">Starred in a movie: {movie}</div>
-      <div className="card__btns">
-        <button>Info</button>
-        <button
-          onClick={(e) => {
-            const element = e.target as HTMLButtonElement;
-            const id = element.parentElement?.parentElement?.id as string;
-            deletePerson(props, id);
-          }}
-        >
-          Delete
-        </button>
-      </div>
       <span className="e-mail">{props.mail}</span>
     </div>
   );
