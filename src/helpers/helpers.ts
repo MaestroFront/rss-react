@@ -26,6 +26,7 @@ export const addPerson = (obj: IResObj) => {
     } else {
       localStorage.setItem('client', JSON.stringify([obj]));
     }
+    localStorage.setItem('validation', 'true');
   }
 };
 

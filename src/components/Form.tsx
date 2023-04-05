@@ -3,6 +3,7 @@ import { ICard } from '../types/interfaces';
 import { addPerson, createID } from '../helpers/helpers';
 
 function FormCard() {
+  // localStorage.setItem('validation', 'false');
   const {
     register,
     handleSubmit,
@@ -38,7 +39,6 @@ function FormCard() {
             required: 'Email is require field!',
             pattern: {
               value:
-                // eslint-disable-next-line no-useless-escape
                 /^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u,
               message: 'Please enter valid Email',
             },
@@ -148,6 +148,22 @@ function FormCard() {
       <button type="submit" className="btn-add-new-person">
         Add a new person
       </button>
+      {localStorage.getItem('validation') === 'true' && (
+        <div className="message">
+          Person are added{' '}
+          <button
+            className="btn btn-cross"
+            title="close window"
+            onClick={(e) => {
+              const element = e.target as HTMLButtonElement;
+              element.parentElement?.remove();
+              localStorage.setItem('validation', 'false');
+            }}
+          >
+            x
+          </button>
+        </div>
+      )}
     </form>
   );
 }
