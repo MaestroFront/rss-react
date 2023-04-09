@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import CreatePerson from './components/Form';
 
 function App() {
+  alert('Please, give me more time! :)');
   return (
     <>
       <Navigation />
