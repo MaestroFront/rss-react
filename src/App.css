@@ -3,10 +3,6 @@
   background-color: navajowhite;
 }
 
-.html::-webkit-scrollbar {
-  width: 0px;
-}
-
 #root {
   position: relative;
 }
@@ -98,12 +94,17 @@
 
 .btn-search,
 .btn-add-new-person,
-.btn-reset {
+.btn-reset,
+.btn-country-info {
   padding: 10px;
   min-width: 10%;
   background-color: antiquewhite;
   cursor: pointer;
   transition: all .2s ease-in-out;
+}
+
+.btn-country-info {
+  padding: 5px 20px;
 }
 
 .btn-reset {
@@ -133,6 +134,7 @@
   flex-wrap: wrap;
   gap: 30px;
   justify-content: center;
+  list-style: none;
 }
 
 .card {
@@ -362,4 +364,21 @@
   border: none;
   color: red;
   cursor: pointer;
+}
+
+.countries-container {
+  margin-bottom: 30px;
+}
+
+.countries-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.countries-item {
+  list-style: none;
+  gap: 10px;
 }
