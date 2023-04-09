@@ -3,7 +3,6 @@ import { ICard } from '../types/interfaces';
 import { addPerson, createID } from '../helpers/helpers';
 
 function FormCard() {
-  // localStorage.setItem('validation', 'false');
   const {
     register,
     handleSubmit,
@@ -14,6 +13,8 @@ function FormCard() {
   });
   const onSubmit: SubmitHandler<ICard> = (data) => {
     data.id = `${createID(data)}`;
+    data.file = localStorage.getItem('File') as string;
+    console.log(data);
     addPerson(data);
     reset();
   };
@@ -67,7 +68,7 @@ function FormCard() {
                   const el = e.target as FileReader | null;
                   if (el?.result) {
                     const src = el.result as string;
-                    localStorage.setItem(element.value, src);
+                    localStorage.setItem('File', src);
                   }
                 };
                 reader.readAsDataURL(element.files[0]);
@@ -145,20 +146,6 @@ function FormCard() {
       <button type="submit" className="btn-add-new-person">
         Add a new person
       </button>
-      {localStorage.getItem('validation') === 'true' && (
-        <div className="message">
-          Person are added{' '}
-          <button
-            className="btn btn-cross"
-            title="close window"
-            onClick={() => {
-              localStorage.setItem('validation', 'false');
-            }}
-          >
-            x
-          </button>
-        </div>
-      )}
     </form>
   );
 }

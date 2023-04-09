@@ -30,19 +30,8 @@ export const addPerson = (obj: IResObj) => {
   }
 };
 
-export const createID = (obj: ICard) => {
-  return (
-    obj.name.split(' ')[0] +
-    '-' +
-    obj.gender +
-    '-' +
-    obj.sphere +
-    '-' +
-    obj.birthday +
-    ':' +
-    Math.floor(Math.random() * 10000)
-  );
-};
+export const createID = ({ name, gender, sphere, birthday }: ICard) =>
+  `${name.split('')[0]}-${gender}-${sphere}-${birthday}:${Math.floor(Math.random() * 10000)}`;
 
 export const createOrUpdateCards = () => {
   let data = [];
@@ -55,27 +44,12 @@ export const createOrUpdateCards = () => {
   return data;
 };
 
-export const installValue = (): string => {
-  const str = localStorage.getItem('search') as string;
-  if (str) {
-    return str;
-  } else {
-    return '';
-  }
-};
+export const installValue = () => localStorage.getItem('search') || '';
 
 export const filterCards = (value: string): void => {
   const cards = JSON.parse(localStorage.getItem('client') as string);
   const newCards = cards.filter((card: ICard) => card.name.includes(value));
   localStorage.setItem('clent-filter', JSON.stringify(newCards));
-};
-
-export const showImage = (props: ICard) => {
-  if (localStorage.getItem(props.name) as string) {
-    return localStorage.getItem(props.name) as string;
-  } else {
-    return props.src;
-  }
 };
 
 export const updateCards = (props: { state: { client: ICard[] } }): void => {

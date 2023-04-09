@@ -6,9 +6,9 @@ import { updateCards } from '../helpers/helpers';
 function CardsField(props: { state: { client: ICard[] } }) {
   updateCards(props);
   return (
-    <div className="cards-field">
+    <ul className="cards-field">
       {props.state.client.map((item: ICard, index: number) => {
-        const { name, gender, birthday, sphere, mail, movie, file, src, id } = item || {};
+        const { name, gender, birthday, sphere, mail, movie, file, id } = item || {};
 
         return (
           <React.Fragment key={index}>
@@ -20,13 +20,12 @@ function CardsField(props: { state: { client: ICard[] } }) {
               mail={mail}
               movie={movie}
               file={file}
-              src={src}
               id={id}
             />
           </React.Fragment>
         );
       })}
-    </div>
+    </ul>
   );
 }
 
