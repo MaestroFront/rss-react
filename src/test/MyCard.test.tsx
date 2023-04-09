@@ -12,7 +12,6 @@ describe('CardsField', () => {
         mail={'alex@mail.ru'}
         movie={false}
         file={''}
-        src={''}
         id={''}
       />
     );
