@@ -9,7 +9,6 @@ import Footer from './components/Footer';
 import CreatePerson from './components/Form';
 
 function App() {
-  alert('Please, give me more time! :)');
   return (
     <>
       <Navigation />
@@ -21,9 +20,6 @@ function App() {
           <Route path="*" element={<ErrorPage />}></Route>
         </Routes>
       </main>
-      <div className="success-adding">
-        <p className="success-adding-text">Person are added!</p>
-      </div>
       <Footer />
     </>
   );
