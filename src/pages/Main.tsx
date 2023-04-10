@@ -28,8 +28,6 @@ const MainPage = () => {
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const element = e.target as HTMLInputElement;
     localStorage.setItem('search', element.value);
-    filterCards(element.value);
-    setSearch(element.value);
   };
 
   const onButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -45,7 +43,14 @@ const MainPage = () => {
           onChange={(e) => onChangeHandler(e)}
           defaultValue={installValue()}
         />
-        <button className="btn-search" onClick={(e) => onButtonClick(e)}>
+        <button
+          className="btn-search"
+          onClick={(e) => {
+            onButtonClick(e);
+            filterCards(localStorage.getItem('search') as string);
+            setSearch(localStorage.getItem('search') as string);
+          }}
+        >
           Search
         </button>
         <Link className="link-add-person" to={'/add-person'}>
