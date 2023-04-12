@@ -1,11 +1,7 @@
 import SearchBar from '../components/SearchBar';
 
 const MainPage = () => {
-  return (
-    <>
-      <SearchBar />
-    </>
-  );
+  return <SearchBar />;
 };
 
 export default MainPage;
