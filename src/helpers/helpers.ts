@@ -48,8 +48,9 @@ export const installValue = () => localStorage.getItem('search') || '';
 
 export const filterCards = (value: string): void => {
   const cards = JSON.parse(localStorage.getItem('client') as string);
+  console.log('CARDS: ', cards);
   const newCards = cards.filter((card: ICard) => card.name.includes(value));
-  localStorage.setItem('clent-filter', JSON.stringify(newCards));
+  localStorage.setItem('client-filter', JSON.stringify(newCards));
 };
 
 export const updateCards = (props: { state: { client: ICard[] } }): void => {

@@ -9,16 +9,19 @@ export const SearchBar = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [countryInfo, setCountryInfo] = useState<Array<number>>([]);
   useEffect(() => {
-    fetch('https://api.sampleapis.com/countries/countries')
-      .then((res) => res.json())
-      .then((result) => {
-        // result.length = 100;
-        const filterData = result.filter((item: ICountry) =>
-          item.name.toUpperCase().includes(search.toUpperCase())
-        );
-        setData([...filterData]);
-        setIsLoaded(true);
-      });
+    const func = () => {
+      fetch('https://api.sampleapis.com/countries/countries')
+        .then((res) => res.json())
+        .then((result) => {
+          // result.length = 100;
+          const filterData = result.filter((item: ICountry) =>
+            item.name.toUpperCase().includes(search.toUpperCase())
+          );
+          setData([...filterData]);
+          setIsLoaded(true);
+        });
+    };
+    func();
   }, [search]);
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const element = e.target as HTMLInputElement;
