@@ -148,6 +148,12 @@
   align-items: center;
   background-color: floralwhite;
   text-align: center;
+  transition: all 1s ease-in-out;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.1);
 }
 
 .card__image-container {
