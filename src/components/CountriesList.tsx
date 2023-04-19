@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ICountry } from '../types/interfaces';
 import { useActions } from '../hooks/useAction';
+import CardsField from './CardsField';
 
 const CountriesList: React.FC = () => {
   const { countries, error, loading } = useTypedSelector((state) => state.country);
@@ -58,6 +59,11 @@ const CountriesList: React.FC = () => {
         </Link>
       </form>
       <div className="countries-container">
+        <CardsField
+          state={{
+            client: JSON.parse(localStorage.getItem('client') as string),
+          }}
+        />
         {
           <ul className="countries-list">
             {filterCountries.map((item: ICountry) => {
