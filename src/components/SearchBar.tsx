@@ -13,7 +13,6 @@ export const SearchBar = () => {
       fetch('https://api.sampleapis.com/countries/countries')
         .then((res) => res.json())
         .then((result) => {
-          // result.length = 100;
           const filterData = result.filter((item: ICountry) =>
             item.name.toUpperCase().includes(search.toUpperCase())
           );

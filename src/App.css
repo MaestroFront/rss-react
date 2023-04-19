@@ -397,6 +397,7 @@
   left: 0;
   background-color: #000000d9;
   z-index: 2;
+  display: none;
 }
 
 .country-info {

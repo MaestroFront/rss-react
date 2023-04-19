@@ -1,15 +1,11 @@
-import CardsField from '../components/CardsField';
-import SearchBar from '../components/SearchBar';
+import CountriesList from '../components/CountriesList';
+import { Filter } from '../components/Filter';
 
 const MainPage = () => {
   return (
     <>
-      <SearchBar />
-      <CardsField
-        state={{
-          client: [],
-        }}
-      />
+      <Filter />
+      <CountriesList />
     </>
   );
 };
