@@ -18,7 +18,7 @@ const CountriesList: React.FC = () => {
     e.preventDefault();
   };
 
-  const [countries_, setCountries] = useState([]);
+  const [search, setSearch] = useState('');
   const [value, setValue] = useState('');
 
   const filterCountries = countries.filter((country: ICountry) =>
@@ -44,8 +44,10 @@ const CountriesList: React.FC = () => {
           type="text"
           className="input-search"
           placeholder="try to search a person"
+          defaultValue={search}
           onChange={(e) => {
             setValue(e.target.value);
+            setSearch(e.target.value);
           }}
         />
         <button className="btn-search" onClick={(e) => onButtonClick(e)}>
