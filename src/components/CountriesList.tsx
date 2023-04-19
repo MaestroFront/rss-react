@@ -59,11 +59,19 @@ const CountriesList: React.FC = () => {
         </Link>
       </form>
       <div className="countries-container">
-        <CardsField
-          state={{
-            client: JSON.parse(localStorage.getItem('client') as string),
-          }}
-        />
+        {localStorage.getItem('client') ? (
+          <CardsField
+            state={{
+              client: JSON.parse(localStorage.getItem('client') as string),
+            }}
+          />
+        ) : (
+          <CardsField
+            state={{
+              client: [],
+            }}
+          />
+        )}
         {
           <ul className="countries-list">
             {filterCountries.map((item: ICountry) => {

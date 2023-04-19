@@ -1,4 +1,6 @@
-export const personsData = [
+import { ICard } from '../types/interfaces';
+
+export const personsData: ICard[] = [
   {
     name: 'William Bradly',
     gender: 'M',
