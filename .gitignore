@@ -9,8 +9,7 @@
 /coverage
 
 # production
-# /build
-tsconfig.jsonyarn.lock
+/build
 
 # misc
 .DS_Store

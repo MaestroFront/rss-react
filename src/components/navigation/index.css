@@ -1,0 +1,16 @@
+.nav {
+    min-width: 150px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 20px;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+}
+
+.link:hover {
+    text-decoration: underline;
+}

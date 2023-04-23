@@ -1,26 +1,24 @@
-import './App.css';
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Navigation from './components/Navigation';
-import MainPage from './pages/Main';
-import ErrorPage from './pages/Error';
-import AboutUs from './pages/AboutUs';
-import Footer from './components/Footer';
-import CreatePerson from './components/Form';
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import { HomePage } from "./pages/home/HomePage";
+import { AboutUs } from "./pages/about-us/AboutUs";
+import { ErrorPage } from "./pages/error/ErrorPage";
+import { Navigation } from "./components/navigation/Navigation";
 
 function App() {
   return (
     <>
-      <Navigation />
+      <header className="header">
+        <Navigation />
+      </header>
       <main className="main">
         <Routes>
-          <Route path="/" element={<MainPage />}></Route>
-          <Route path="/about-us" element={<AboutUs />}></Route>
-          <Route path="/add-person" element={<CreatePerson />}></Route>
+          <Route path="/" element={<HomePage />}></Route>
+          <Route path="/aboutus" element={<AboutUs />}></Route>
           <Route path="*" element={<ErrorPage />}></Route>
         </Routes>
       </main>
-      <Footer />
+      <footer className="footer"></footer>
     </>
   );
 }
