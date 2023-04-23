@@ -5,26 +5,15 @@ import { IResult } from "../../components/models/models";
 
 export const HomePage = () => {
   const [search, setSearch] = useState("");
+  const [showInfo, setShowInfo] = useState([0]);
   const debounce = useDebounce(search);
   const { isLoading, isError, data } = useSearchCardsQuery(debounce, {
     // skip: debounce.length < 2,
   });
 
   useEffect(() => {
-    console.log("Search: ", debounce);
-  }, [debounce]);
-
-  const showInfo = (item: IResult) => {
-    return (
-      <div className="info">
-        <p>Name: {item.name}</p>
-        <p>Species: {item.species}</p>
-        <p>Status: {item.status}</p>
-        <p>Gender: {item.gender}</p>
-        <p>Location: {item.location.name}</p>
-      </div>
-    );
-  };
+    console.log("Search: ", showInfo);
+  }, [showInfo]);
 
   return (
     <>
@@ -52,14 +41,33 @@ export const HomePage = () => {
               <div className="btn-container">
                 <button
                   className="btn btn-info"
-                  onClick={() => {
-                    console.log("click!");
-                    showInfo(item);
-                  }}
+                  onClick={() => setShowInfo([item.id])}
                 >
                   Info
                 </button>
               </div>
+              {showInfo.includes(item.id) ? (
+                <div
+                  className="info-container"
+                  onClick={() => setShowInfo([0])}
+                >
+                  <div className="info" onClick={(e) => e.stopPropagation()}>
+                    <p>Name: {item.name}</p>
+                    <p>Species: {item.species}</p>
+                    <p>Status: {item.status}</p>
+                    <p>Gender: {item.gender}</p>
+                    <p>Location: {item.location.name}</p>
+                    <button
+                      className="btn btn-cross"
+                      onClick={() => setShowInfo([0])}
+                    >
+                      x
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div></div>
+              )}
             </li>
           ))
         )}
