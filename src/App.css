@@ -1,7 +1,10 @@
 @import url(../src/components/navigation/index.css);
+@import url(../src/pages/home/index.css);
 
-.body {
-  width: 100vw;
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
 .root {
@@ -14,11 +17,18 @@
 }
 
 .header {
+  position: sticky;
+  top: 0px;
+  z-index: 2;
   width: 100%;
-  height: 30px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 20px;
+  padding: 10px 20px;
   background-color: lightgrey;
+}
+
+.main {
+  width: 100%;
+  padding: 20px;
 }

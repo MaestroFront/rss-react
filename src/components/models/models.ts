@@ -1,17 +1,41 @@
-export interface ICard {
-  title: string;
-  year: number;
-  creator: Array<string>;
-  rating: string;
-  genre: Array<string>;
-  runtime_in_minutes: number;
-  episodes: number;
-  image: string;
-  id: number;
+export interface Root {
+  info: Info
+  results: IResult[]
+}
+
+export interface Info {
+  count: number
+  pages: number
+  next: string
+  prev: any
+}
+
+export interface IResult {
+  id: number
+  name: string
+  status: string
+  species: string
+  type: string
+  gender: string
+  origin: Origin
+  location: Location
+  image: string
+  episode: string[]
+  url: string
+  created: string
+}
+
+export interface Origin {
+  name: string
+  url: string
+}
+
+export interface Location {
+  name: string
+  url: string
 }
 
 export interface ServerResponse<T> {
-  total_count: number;
-  incopmlete_results: boolean;
-  items: T[];
+  info: Info;
+  results: T[] | Promise<T[]>
 }

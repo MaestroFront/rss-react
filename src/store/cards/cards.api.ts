@@ -1,17 +1,17 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ICard, ServerResponse } from "../../components/models/models";
+import { IResult, ServerResponse } from "../../components/models/models";
 
 export const cardsApi = createApi({
   reducerPath: "cards/api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.sampleapis.com/",
+    baseUrl: "https://rickandmortyapi.com/api/",
   }),
   endpoints: (build) => ({
-    searchCards: build.query<ICard[], string>({
+    searchCards: build.query<IResult[], string>({
       query: (search: string) => ({
-        url: `cartoons/cartoons2D/${search}`,
+        url: `character/?name=${search}`,
       }),
-      transformResponse: (response: ServerResponse<ICard>) => response.items,
+      transformResponse: (response: ServerResponse<IResult>) => response.results,
     }),
   }),
 });
